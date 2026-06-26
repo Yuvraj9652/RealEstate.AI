@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
+    #For Logout
+    "rest_framework_simplejwt.token_blacklist",
+
     # Third Party
     "rest_framework",
     "corsheaders",
@@ -125,8 +128,17 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]
+from corsheaders.defaults import default_headers
 
-#Added RestFramework
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    "authorization",
+]
+
+
+#Added RestFramework for JWTAuthentications
 REST_FRAMEWORK = {
 
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -136,6 +148,22 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": (
         "rest_framework.permissions.IsAuthenticated",
     ),
+}
+
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
+
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+
+    "ROTATE_REFRESH_TOKENS": True,
+
+    "BLACKLIST_AFTER_ROTATION": True,
+
+    "UPDATE_LAST_LOGIN": True,
 }
 
 

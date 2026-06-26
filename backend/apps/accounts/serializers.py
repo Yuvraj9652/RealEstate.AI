@@ -139,18 +139,11 @@ class LoginSerializer(serializers.Serializer):
 
 class ChangePasswordSerializer(serializers.Serializer):
 
-    old_password = serializers.CharField(
-        write_only=True
-    )
+    old_password = serializers.CharField(write_only=True)
 
-    new_password = serializers.CharField(
-        write_only=True,
-        min_length=8
-    )
+    new_password = serializers.CharField(write_only=True,min_length=8)
 
-    confirm_password = serializers.CharField(
-        write_only=True
-    )
+    confirm_password = serializers.CharField(write_only=True)
 
     def validate(self, attrs):
 
@@ -162,3 +155,4 @@ class ChangePasswordSerializer(serializers.Serializer):
             )
 
         return attrs
+    
